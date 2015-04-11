@@ -5,11 +5,24 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @jobs = Job.all
+    respond_to do |format|
+      format.html
+      format.json{
+        render :json => @jobs.to_json
+      }
+    end
   end
 
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @job = Job.find( params[:id])
+    respond_to do |format|
+      format.html
+      format.json{
+        render :json => @job.to_json
+      }
+    end
   end
 
   # GET /jobs/new

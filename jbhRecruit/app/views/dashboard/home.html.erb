@@ -29,7 +29,11 @@
     <%= button_to 'Edit Profile', edit_user_registration_path,:method => "get", class: "btn btn-default" %>
       <div class="form-group">
         <label>Current Resume</label><br>
-        <a href="<%= current_user.resume.url %>">Current Resume</a>
+        <% if current_user.resume.url.include? "jpg" %>
+          <img src=" <%= current_user.resume.url %>">
+        <%else%>
+          <a href="<%= current_user.resume.url %>">Link to Resume</a>
+        <%end%>
       </div>
 
 

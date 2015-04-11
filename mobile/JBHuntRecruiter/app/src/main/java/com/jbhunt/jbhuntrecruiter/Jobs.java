@@ -1,17 +1,34 @@
 package com.jbhunt.jbhuntrecruiter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class Jobs extends ActionBarActivity
@@ -21,7 +38,7 @@ public class Jobs extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
+    private ListView mDynamicListView;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -29,18 +46,72 @@ public class Jobs extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v("MattWasHere","Bleh");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs);
-
+        mDynamicListView = (ListView )findViewById(R.id.dynamiclistview);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+      getJobData();
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        getJobData();
     }
+
+    public void getJobData()
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(JBHuntRecruiterUtils.URL_POSITION, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                // called when response HTTP status is "200 OK"
+                Log.v("Nope", "Fdsafdsafsda");
+                try {
+                    ArrayList<String> JobList = new ArrayList<String>();
+
+                    JSONArray positions = response;
+                    Log.v("position size", positions.length() + "" );
+                    for (int i = 0; i < positions.length(); i++) {
+                        JSONObject c = positions.getJSONObject(i);
+                        if(c != null) {
+//                        // Storing each json item in variable
+                            String position = c.getString("category");
+                            String subPosition = position.split("\t")[0].trim();
+                            String test = getIntent().getStringExtra("subPosition");
+                            if(test.equals(subPosition))
+                                JobList.add(c.getString("title")+ "\n" + c.getString("siteID"));
+                            position = position.split("\t")[0].trim();
+                            //FUCK IT WE'LL DO IT LIVE!!!!
+
+                        }
+                    }
+                    ArrayAdapter<String> positionAdapter = new ArrayAdapter<String>(Jobs.this, android.R.layout.simple_list_item_1, JobList);
+                    ListView titles = (ListView)findViewById(R.id.dynamiclistview);
+                    titles.setAdapter(positionAdapter);
+                }
+                catch(Exception e){
+                    Log.e("Error", e.toString());
+                }
+            }
+
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+        });
+    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

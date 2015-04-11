@@ -21,5 +21,11 @@
         android:layout_gravity="start"
         android:name="com.jbhunt.jbhuntrecruiter.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer_jobs" />
-
+    <ListView
+        android:id="@+id/dynamiclistview"
+        android:layout_width="match_parent"
+        android:layout_height="404dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </ListView>
 </android.support.v4.widget.DrawerLayout>

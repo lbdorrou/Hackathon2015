@@ -15,38 +15,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.ButtonRectangle;
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+public class MainActivity extends ActionBarActivity {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    Button driver;
-    Button office;
-    Button maintenance;
+    ButtonRectangle driver;
+    ButtonFlat office;
+    ButtonFlat maintenance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        driver = (Button)findViewById(R.id.button1);
+
+        driver = (ButtonRectangle)findViewById(R.id.button1);
         driver.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), positionType.class);
@@ -56,7 +54,7 @@ public class MainActivity extends ActionBarActivity
 
         });
 
-        office = (Button)findViewById(R.id.button2);
+        office = (ButtonFlat)findViewById(R.id.button2);
         office.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), positionType.class);
@@ -66,7 +64,7 @@ public class MainActivity extends ActionBarActivity
 
         });
 
-        maintenance = (Button)findViewById(R.id.button3);
+        maintenance = (ButtonFlat)findViewById(R.id.button3);
         maintenance.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), positionType.class);
@@ -77,14 +75,6 @@ public class MainActivity extends ActionBarActivity
         });
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -108,18 +98,6 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

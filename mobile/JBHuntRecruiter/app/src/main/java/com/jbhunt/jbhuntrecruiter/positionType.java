@@ -21,6 +21,7 @@ import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -29,13 +30,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class positionType extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks  {
+public class positionType extends ActionBarActivity  {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
     Button test;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -44,18 +43,16 @@ public class positionType extends ActionBarActivity
     JSONParser jParser = new JSONParser();
     String positionTypeFlag;
     JSONArray positionTypes = null;
-    ArrayList<String> positionSubTypes;
+    ArrayList<String> positionSubTypes = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_position_type);
 
-
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
         positionTypeFlag = this.getIntent().getStringExtra("positionTypeFlag");
         // Set up the drawer.
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(JBHuntRecruiterUtils.URL_POSITION, new JsonHttpResponseHandler() {
 
@@ -65,25 +62,41 @@ public class positionType extends ActionBarActivity
             }
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // called when response HTTP status is "200 OK"
                 try {
 
                     Log.v("test", "Test");
-                    JSONArray positions = response.getJSONArray("positions");
+                    JSONArray positions = response;
+                    Log.v("position size", positions.length() + "" );
                     for (int i = 0; i < positions.length(); i++) {
                         JSONObject c = positions.getJSONObject(i);
+                        if(c != null) {
+//                        // Storing each json item in variable
+                            String position = c.getString("category");
+                            position = position.split("\t")[0].trim();
+                            //FUCK IT WE'LL DO IT LIVE!!!!
+                            if((position.toUpperCase().contains("MAINTENANCE") && "maintenance".equals(positionTypeFlag))
+                                    || (!position.toUpperCase().contains("MAINTENANCE")  &&
+                                                !position.toUpperCase().contains("DRIVER") && "office".equals(positionTypeFlag))
+                                    || (position.toUpperCase().contains("DRIVER") && "driver".equals(positionTypeFlag)
+                                    && !position.toUpperCase().contains("DRIVER RECRUITING"))
+                                    )
+                            {
 
-                        // Storing each json item in variable
-                        String position = c.getString("positionType");
-
-                        positionSubTypes.add(position);
+                                if (position != null && !positionSubTypes.contains(position))
+                                    positionSubTypes.add(position);
+//                            }
+                            }
+                        }
                     }
                     ArrayAdapter<String> positionAdapter = new ArrayAdapter<String>(positionType.this, android.R.layout.simple_list_item_1, positionSubTypes);
                     ListView titles = (ListView)findViewById(R.id.lstvPositionTypes);
                     titles.setAdapter(positionAdapter);
                 }
-                catch(Exception e){}
+                catch(Exception e){
+                    Log.e("Error", e.toString());
+                }
             }
 
 
@@ -97,25 +110,14 @@ public class positionType extends ActionBarActivity
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long id){
-                Intent it = new Intent(getApplicationContext(),positionType.class);
+                Intent it = new Intent(getApplicationContext(),Jobs.class);
 
-                it.putExtra("position",(positionSubTypes.get(index)));
+                it.putExtra("subPosition",(positionSubTypes.get(index)));
                 startActivity(it);
             }
         });
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -139,18 +141,6 @@ public class positionType extends ActionBarActivity
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.position_type, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

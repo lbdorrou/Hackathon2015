@@ -29,7 +29,7 @@
     <%= button_to 'Edit Profile', edit_user_registration_path,:method => "get", class: "btn btn-default" %>
       <div class="form-group">
         <label>Current Resume</label><br>
-        <a href="<%= request.original_url+current_user.resume.url %>">Current Resume</a>
+        <a href="<%= +current_user.resume.url %>">Current Resume</a>
       </div>
 
 

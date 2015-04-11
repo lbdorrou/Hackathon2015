@@ -37,7 +37,6 @@ def Parse(url):
 					Qualifications = descRows[11].find_all('td')[1].get_text().strip().encode('utf-8').replace("'", "")
 				except: 
 					pass
-				continue
 				
 				isFullTime = False
 				if Time is 'Full Time':

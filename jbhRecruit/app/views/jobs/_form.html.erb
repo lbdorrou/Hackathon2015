@@ -12,16 +12,24 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :jobId %><br>
+    <%= f.text_area :jobId %>
+  </div>
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_area :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :department %><br>
+    <%= f.text_area :department %>
   </div>
   <div class="field">
     <%= f.label :category %><br>
     <%= f.text_area :category %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :siteID %><br>
@@ -37,7 +45,11 @@
   </div>
   <div class="field">
     <%= f.label :shift %><br>
-    <%= f.number_field :shift %>
+    <%= f.text_area :shift %>
+  </div>
+  <div class="field">
+    <%= f.label :qualifications %><br>
+    <%= f.text_area :qualifications %>
   </div>
   <div class="actions">
     <%= f.submit %>

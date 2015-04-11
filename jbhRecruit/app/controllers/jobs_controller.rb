@@ -4,13 +4,42 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
-    respond_to do |format|
-      format.html
-      format.json{
-        render :json => @jobs.to_json
-      }
+    if params[:search]
+      @jobs = Job.search(params[:search])
+
+      respond_to do |format|
+        format.html
+        format.json{
+          render :json => @jobs.to_json
+        }
+      end
+
+    else
+      @jobs = Job.all
+
+      @job = {}
+      @alljobs = []
+      @temp = []
+
+      for current in @jobs
+        @temp.push(current.department)
+      end
+      @uniqjobs = @temp.uniq
+      @uniqjobs.sort_by!{ |m| m.downcase }
+
+      for current in @uniqjobs
+        @job[current] = @jobs.select{|x| x.department == current }
+      end
+
+      respond_to do |format|
+        format.html
+        format.json{
+          render :json => @jobs.to_json
+        }
+      end
+
     end
+
   end
 
   # GET /jobs/1

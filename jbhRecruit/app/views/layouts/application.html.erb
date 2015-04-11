@@ -4,16 +4,18 @@
   <title>JbhRecruit</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'huntStyle', media: 'all' %>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<body style="background: #555;  background:url('/assets/pattern.png');">
 
-<div>
-<%= render 'shared/navigation' %>
+<div  style="padding: 2px 0 2px; background: #f6dc46; box-shadow: 0px 4px 2px #000;">
+  <%= render 'shared/navigation' %>
 </div>
-<div>
+
+<div id="main-container" class="container-fluid" style="  width: 1024px; background-color: rgba(255, 255, 255, 0.85);">
+
 <%= yield %>
 </div>
 </body>

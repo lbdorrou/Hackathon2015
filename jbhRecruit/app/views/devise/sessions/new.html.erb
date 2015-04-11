@@ -1,3 +1,6 @@
+<div class="row" style="padding-top: 50px; padding-bottom: 800px;">
+  <div class="col-md-2" ></div>
+  <div class="col-md-3" >
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -6,7 +9,7 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
-  <div class="field">
+  <div class="field" >
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
@@ -24,3 +27,10 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+  <div class="col-md-2">
+    <p>Log in using your recruiting account to view and edit jobs.</p>
+    <p class="notice" style="color: red;"><%= notice %></p>
+    <p class="alert" style="color: red;"><%= alert %></p>
+  </div>
+    </div>

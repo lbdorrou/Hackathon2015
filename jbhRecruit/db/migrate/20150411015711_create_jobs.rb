@@ -1,14 +1,15 @@
 class CreateJobs < ActiveRecord::Migration
   def change
     create_table :jobs do |t|
+      t.text :jobId
       t.text :title
-      t.text :description
+      t.text :department
       t.text :category
+      t.text :description
       t.integer :siteID
       t.date :postingDate
       t.boolean :fullTime
-      t.integer :shift
-
+      t.text :shift
       t.timestamps null: false
     end
   end

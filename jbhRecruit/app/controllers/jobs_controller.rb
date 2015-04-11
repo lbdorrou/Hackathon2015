@@ -49,7 +49,7 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-        render :json => @job.to_jsonz
+        render :json => @job.to_json
       }
     end
   end

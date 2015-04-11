@@ -49,6 +49,10 @@
   <strong>Qualifications:</strong>
   <%= @job.qualifications %>
 </p>
+<% if current_user.try(:admin?) %>
+    <%= link_to 'Edit', edit_job_path(@job) %>
+<% else %>
+    <%= link_to 'Apply', new_apply_path(:user => current_user.email, :jobId => @job, :date => Time.now) %>
+<% end %>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>

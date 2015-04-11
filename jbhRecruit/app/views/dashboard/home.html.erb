@@ -1,0 +1,14 @@
+<h1>Dashboard#home</h1>
+<p>Find me in app/views/dashboard/home.html.erb</p>
+
+<% current_or_guest_user %>
+
+<% if current_user.try(:admin?) %>
+    <%=label_tag 'Admin' %>
+<% end %>
+
+<%= label_tag current_user.name %>
+
+
+    <%= link_to('Sign in', user_session_path, :method => :post) %>
+

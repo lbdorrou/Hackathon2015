@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
         createAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), News.class);
-                startActivity(intent);
+//                startActivity(intent);
             }
 
         });

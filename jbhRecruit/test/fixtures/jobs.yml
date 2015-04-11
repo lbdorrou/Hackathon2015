@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  description: MyText
+  category: MyText
+  siteID: 1
+  postingDate: 2015-04-10
+  fullTime: false
+  shift: 1
+
+two:
+  title: MyText
+  description: MyText
+  category: MyText
+  siteID: 1
+  postingDate: 2015-04-10
+  fullTime: false
+  shift: 1

@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard#home'
 
-  devise_for :users
+  # devise_for :users
+    devise_for :users, controllers: {
+      sessions: 'sessions'
+    }
+ 
   resources :jobs
   resources :jobs
   resources :jobs

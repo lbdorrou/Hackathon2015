@@ -1,6 +1,7 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -16,25 +17,51 @@
             android:layout_width="300dp"
             android:layout_height="75dp"
             android:id="@+id/button1"
-            android:layout_above="@+id/button2"
+            materialdesign:animate = "false"
+            android:layout_alignTop="@id/action_bar"
+            android:layout_marginTop="85dp"
             android:layout_centerHorizontal="true">
         </com.gc.materialdesign.views.ButtonRectangle >
-        <com.gc.materialdesign.views.ButtonFlat android:text="Office"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.gc.materialdesign.views.ButtonRectangle android:text="Office"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
             android:id="@+id/button2"
-            android:layout_above="@+id/button3"
+            android:layout_below = "@+id/button1"
+            materialdesign:animate = "false"
             android:layout_centerHorizontal="true">
 
-        </com.gc.materialdesign.views.ButtonFlat>
-        <com.gc.materialdesign.views.ButtonFlat android:text="Maintance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3"
+        </com.gc.materialdesign.views.ButtonRectangle>
+        <com.gc.materialdesign.views.ButtonRectangle android:text="Maintance"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:id="@+id/button3"
+        android:layout_centerVertical="true"
+        materialdesign:animate = "false"
+            android:layout_below = "@+id/button2"
+        android:layout_centerHorizontal="true">
+
+    </com.gc.materialdesign.views.ButtonRectangle>
+        <com.gc.materialdesign.views.ButtonRectangle android:text="Login"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:id="@+id/button4"
+            android:layout_centerVertical="true"
+            materialdesign:animate = "false"
+
+            android:layout_below = "@+id/button3"
+            android:layout_centerHorizontal="true">
+
+        </com.gc.materialdesign.views.ButtonRectangle>
+        <com.gc.materialdesign.views.ButtonRectangle android:text="Create account"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:id="@+id/button5"
+            android:layout_below = "@+id/button4"
+            materialdesign:animate = "false"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 
-        </com.gc.materialdesign.views.ButtonFlat>
+        </com.gc.materialdesign.views.ButtonRectangle>
     </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>

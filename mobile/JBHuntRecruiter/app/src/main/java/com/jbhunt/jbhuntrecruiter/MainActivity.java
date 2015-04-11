@@ -4,18 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.gc.materialdesign.views.ButtonFlat;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 
@@ -30,8 +25,10 @@ public class MainActivity extends ActionBarActivity {
      */
     private CharSequence mTitle;
     ButtonRectangle driver;
-    ButtonFlat office;
-    ButtonFlat maintenance;
+    ButtonRectangle office;
+    ButtonRectangle maintenance;
+    ButtonRectangle login;
+    ButtonRectangle createAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
 
         });
 
-        office = (ButtonFlat)findViewById(R.id.button2);
+        office = (ButtonRectangle)findViewById(R.id.button2);
         office.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), positionType.class);
@@ -64,11 +61,28 @@ public class MainActivity extends ActionBarActivity {
 
         });
 
-        maintenance = (ButtonFlat)findViewById(R.id.button3);
+        maintenance = (ButtonRectangle)findViewById(R.id.button3);
         maintenance.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), positionType.class);
                 intent.putExtra("positionTypeFlag", "maintenance");
+                startActivity(intent);
+            }
+
+        });
+
+        login = (ButtonRectangle)findViewById(R.id.button4);
+        login.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), positionType.class);
+            }
+
+        });
+
+        createAccount = (ButtonRectangle)findViewById(R.id.button5);
+        createAccount.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), News.class);
                 startActivity(intent);
             }
 

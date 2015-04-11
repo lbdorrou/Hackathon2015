@@ -36,6 +36,21 @@ ActiveRecord::Schema.define(version: 20150411115904) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.text     "jobId"
+    t.text     "title"
+    t.text     "department"
+    t.text     "category"
+    t.text     "description"
+    t.text     "siteID"
+    t.date     "postingDate"
+    t.boolean  "fullTime"
+    t.text     "shift"
+    t.text     "qualifications"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -51,6 +66,10 @@ ActiveRecord::Schema.define(version: 20150411115904) do
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.string   "name"
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

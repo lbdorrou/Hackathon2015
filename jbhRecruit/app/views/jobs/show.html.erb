@@ -1,18 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Jobid:</strong>
+  <%= @job.jobId %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @job.title %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @job.description %>
+  <strong>Department:</strong>
+  <%= @job.department %>
 </p>
 
 <p>
   <strong>Category:</strong>
   <%= @job.category %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @job.description %>
 </p>
 
 <p>
@@ -33,6 +43,11 @@
 <p>
   <strong>Shift:</strong>
   <%= @job.shift %>
+</p>
+
+<p>
+  <strong>Qualifications:</strong>
+  <%= @job.qualifications %>
 </p>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |

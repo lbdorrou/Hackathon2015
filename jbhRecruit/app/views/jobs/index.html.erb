@@ -5,13 +5,16 @@
 <table>
   <thead>
     <tr>
+      <th>Jobid</th>
       <th>Title</th>
-      <th>Description</th>
+      <th>Department</th>
       <th>Category</th>
+      <th>Description</th>
       <th>Siteid</th>
       <th>Postingdate</th>
       <th>Fulltime</th>
       <th>Shift</th>
+      <th>Qualifications</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,13 +22,16 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
+        <td><%= job.jobId %></td>
         <td><%= job.title %></td>
-        <td><%= job.description %></td>
+        <td><%= job.department %></td>
         <td><%= job.category %></td>
+        <td><%= job.description %></td>
         <td><%= job.siteID %></td>
         <td><%= job.postingDate %></td>
         <td><%= job.fullTime %></td>
         <td><%= job.shift %></td>
+        <td><%= job.qualifications %></td>
         <td><%= link_to 'Show', job %></td>
         <td><%= link_to 'Edit', edit_job_path(job) %></td>
         <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,19 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  jobId: MyText
   title: MyText
-  description: MyText
+  department: MyText
   category: MyText
+  description: MyText
   siteID: 1
-  postingDate: 2015-04-10
+  postingDate: 2015-04-11
   fullTime: false
-  shift: 1
+  shift: MyText
+  qualifications: MyText
 
 two:
+  jobId: MyText
   title: MyText
-  description: MyText
+  department: MyText
   category: MyText
+  description: MyText
   siteID: 1
-  postingDate: 2015-04-10
+  postingDate: 2015-04-11
   fullTime: false
-  shift: 1
+  shift: MyText
+  qualifications: MyText

@@ -1,5 +1,20 @@
-<p id="notice"><%= notice %></p>
 
+<form class="form-inline">
+
+
+
+  <% if user_signed_in? %>
+    <% if current_user.try(:admin?) %>
+        <%= button_to 'Edit', edit_job_path(@job),:method => "get", class: "btn btn-default" %>
+    <% else %>
+        <%= button_to 'Apply', applies_path(:user => current_user.email, :jobId => @job, :date => Time.now), :method => "post", class: "btn btn-default" %>
+    <% end %>
+<% end %>
+
+</form>
+
+<div class="row">
+  <div class="col-md-12">
 <p>
   <strong>Jobid:</strong>
   <%= @job.jobId %>
@@ -49,10 +64,5 @@
   <strong>Qualifications:</strong>
   <%= @job.qualifications %>
 </p>
-<% if current_user.try(:admin?) %>
-    <%= link_to 'Edit', edit_job_path(@job) %>
-<% else %>
-    <%= link_to 'Apply', new_apply_path(:user => current_user.email, :jobId => @job, :date => Time.now) %>
-<% end %>
-
-<%= link_to 'Back', jobs_path %>
+</div>
+</div>

@@ -1,7 +1,9 @@
 <div class="container" style="width: 1000px">
   <div style="padding-top: 15px" class="row">
-    <div class="col-md-11">
+    <div class="col-md-8">
       <h1 style="margin:0" >Jobs</h1>
+    </div>
+    <div class="col-md-4" style="float: right">
       <%= form_tag(jobs_path, method: :get )  do %>
           <%= text_field_tag :search, nil, :class => 'form-control' %>
           <%= submit_tag "Search", class: "btn btn-default"%>

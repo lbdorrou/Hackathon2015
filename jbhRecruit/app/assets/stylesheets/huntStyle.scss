@@ -29,6 +29,14 @@
   background-color: transparent;
 }
 
+a {
+  color: black;
+}
 
+a:hover, a:focus {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
 //END
 

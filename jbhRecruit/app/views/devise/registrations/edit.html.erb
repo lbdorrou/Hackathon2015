@@ -31,7 +31,8 @@
   <%= f.file_field :resume %>
   </div>
   <div class="form-group">
-        <a href="<%= request.original_url+current_user.resume.url %>">Current Resume</a>
+    <%= f.label :Current_Resume, class: 'control-label'  %><br>
+    <img src=" <%= current_user.resume.url %>">
   </div>
   <div class="actions">
     <%= f.submit "Update", class:"btn btn-primary btn-lg pull-right bottom: 5px" %>

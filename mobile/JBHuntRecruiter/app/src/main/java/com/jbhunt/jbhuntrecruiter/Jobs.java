@@ -1,6 +1,7 @@
 package com.jbhunt.jbhuntrecruiter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -64,6 +65,8 @@ public class Jobs extends ActionBarActivity
 
     public void getJobData()
     {
+        final com.gc.materialdesign.widgets.ProgressDialog progress = new com.gc.materialdesign.widgets.ProgressDialog(this, "Loading");
+        progress.show();
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(JBHuntRecruiterUtils.URL_POSITION, new JsonHttpResponseHandler() {
 
@@ -75,6 +78,7 @@ public class Jobs extends ActionBarActivity
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // called when response HTTP status is "200 OK"
+                progress.dismiss();
                 Log.v("Nope", "Fdsafdsafsda");
                 try {
                     JobList = new ArrayList<String>();

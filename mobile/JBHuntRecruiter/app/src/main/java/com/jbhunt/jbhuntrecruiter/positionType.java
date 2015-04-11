@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.gc.materialdesign.widgets.ProgressDialog;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -44,8 +45,11 @@ public class positionType extends ActionBarActivity  {
     String positionTypeFlag;
     JSONArray positionTypes = null;
     ArrayList<String> positionSubTypes = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final ProgressDialog progress = new ProgressDialog(this, "Loading");
+        progress.show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_position_type);
 
@@ -65,7 +69,7 @@ public class positionType extends ActionBarActivity  {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // called when response HTTP status is "200 OK"
                 try {
-
+                    progress.dismiss();
                     Log.v("test", "Test");
                     JSONArray positions = response;
                     Log.v("position size", positions.length() + "" );

@@ -21,11 +21,23 @@
         android:layout_gravity="start"
         android:name="com.jbhunt.jbhuntrecruiter.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer_jobs" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:background="@color/yellow"
+        android:src="@drawable/logo"
+        android:layout_marginBottom="435dp"
+        />
+
     <ListView
+        android:layout_marginTop="75dp"
         android:id="@+id/dynamiclistview"
-        android:layout_width="match_parent"
-        android:layout_height="404dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-    </ListView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"></ListView>
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true" -->
+
 </android.support.v4.widget.DrawerLayout>

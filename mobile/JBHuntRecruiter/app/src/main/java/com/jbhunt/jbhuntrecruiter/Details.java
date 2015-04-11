@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.gc.materialdesign.widgets.ProgressDialog;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -39,6 +40,8 @@ public class Details extends ActionBarActivity {
     }
     public void getJobData()
     {
+        final ProgressDialog progress = new ProgressDialog(this, "Loading");
+        progress.show();
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://lbdorrou.ddns.net:3000/jobs/" + getIntent().getStringExtra("id") + "?format=json", new JsonHttpResponseHandler() {
 
@@ -49,6 +52,7 @@ public class Details extends ActionBarActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                progress.dismiss();
                 // called when response HTTP status is "200 OK"
                 Log.v("Nope", "Fdsafdsafsda");
                 try {
@@ -57,8 +61,12 @@ public class Details extends ActionBarActivity {
                     if(positions!=null)
                     {
                         for(int i = 0; i<positions.names().length(); i++){
-                            if(positions.get(positions.names().getString(i))!= null)
-                                JobDetails.add(positions.names().getString(i)+": "+(positions.get(positions.names().getString(i))));
+                            if(positions.get(positions.names().getString(i))!= null) {
+                                String title = positions.names().getString(i);
+                                if(positions.get(positions.names().getString(i)) != null) {
+                                    JobDetails.add(titleize(title) + ": " + positions.get(positions.names().getString(i)));
+                                }
+                            }
                         }
                     }
                     ArrayAdapter<Object> positionAdapter = new ArrayAdapter<Object>(Details.this, android.R.layout.simple_list_item_1, JobDetails);
@@ -79,6 +87,14 @@ public class Details extends ActionBarActivity {
         });
     }
 
+    private String titleize(String input)
+    {
+        if(input != null && input.length() > 1)
+        {
+            input = input.substring(0,1).toUpperCase() + input.substring(1).replace('_', ' ');
+        }
+        return input;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

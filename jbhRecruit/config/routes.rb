@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :applies
   root 'jobs#index'
 
   get 'dashboard' => 'dashboard#home'

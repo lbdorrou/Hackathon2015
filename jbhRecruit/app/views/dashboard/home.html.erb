@@ -1,17 +1,26 @@
-<h1>Dashboard#home</h1>
-<p>Find me in app/views/dashboard/home.html.erb</p>
+<h1>Dashboard</h1>
+
 
 
 
 <% if current_user.try(:admin?) %>
-    <!-- THIS IS THE ADMIN USER DASHBOARD
-        Who has applied
-    -->
-
+    <h1>Welcome Admin</h1>
+    <% @applications.each do |b| %>
+        <tr>
+          <td><%= link_to b.user, b %></td>
+          <td><%= b.jobId %></td>
+          <td><%= b.date %></td>
+        </tr>
+    <%end%>
 <% else %>
-    <!-- THIS IS THE NORMAL USER DASHBOARD
-        Jobs Applied for
-     -->
+    <h1>Welcome User</h1>
+    <% @applications.each do |b| %>
+        <tr>
+          <td><%= link_to @jobs[b.jobId].title, "/jobs/" + b.jobId.to_s %></td>
+          <td><%= b.user %></td>
+          <td><%= b.date %></td>
+        </tr>
+    <%end%>
 <% end %>
 
 <%= label_tag current_user.name %>

@@ -37,24 +37,24 @@ def Parse(url):
 					Qualifications = descRows[11].find_all('td')[1].get_text().strip().encode('utf-8').replace("'", "")
 				except: 
 					pass
-				
+
 				isFullTime = False
 				if Time is 'Full Time':
 					isFullTime = True
 
-				result += "'jobId': '" + Id + "',"
-				result += "'title': '" + Title + "',"
-				result += "'department': '" + Department + "',"
-				result += "'category': '" + Category + "',"
-				result += "'siteID': '00000',"
-				result += "'postingDate': '" + jobDate + "',"
-				# result += "'Country': '" + Country + "',"
-				# result += "'State': '" + State + "',"
-				# result += "'City': '" + City + "',"
-				result += "'fullTime': '" + str(isFullTime) + "',"
-				result += "'shift': '" + Shift + "',"
-				result += "'description': '" + Desc + "',"
-				result += "'Qualifications': '" + Qualifications + "'"
+				result += "'jobId'=> '" + Id + "',"
+				result += "'title'=> '" + Title + "',"
+				result += "'department'=> '" + Department + "',"
+				result += "'category'=> '" + Category + "',"
+				result += "'siteID'=> '00000',"
+				result += "'postingDate'=> '" + jobDate + "',"
+				# result += "'Country'=> '" + Country + "',"
+				# result += "'State'=> '" + State + "',"
+				# result += "'City'=> '" + City + "',"
+				result += "'fullTime'=> '" + str(isFullTime) + "',"
+				result += "'shift'=> '" + Shift + "',"
+				result += "'description'=> '" + Desc + "',"
+				result += "'qualifications'=> '" + Qualifications + "'"
 				result += ')\n'
 				# print descRows[0].find_all('td')[1].get_text()
 

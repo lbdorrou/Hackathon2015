@@ -10,6 +10,7 @@ class CreateJobs < ActiveRecord::Migration
       t.date :postingDate
       t.boolean :fullTime
       t.text :shift
+      t.text :qualifications
       t.timestamps null: false
     end
   end

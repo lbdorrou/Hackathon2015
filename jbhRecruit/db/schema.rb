@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150411051421) do
     t.text     "department"
     t.text     "category"
     t.text     "description"
-    t.integer  "siteID"
+    t.text     "siteID"
     t.date     "postingDate"
     t.boolean  "fullTime"
     t.text     "shift"

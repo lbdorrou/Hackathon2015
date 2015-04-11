@@ -7,11 +7,18 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string-array name="navigation_drawer_items_array">
+        <item>Jobs</item>
+        <item>News</item>
+        <item>Settings</item>
+    </string-array>
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_position_type">positionType</string>
     <string name="title_activity_main_page">MainPage</string>
     <string name="title_activity_jobs">Jobs</string>
+    <string name="title_activity_details">Details</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_news">News</string>
 </resources>

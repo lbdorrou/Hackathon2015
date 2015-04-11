@@ -3,7 +3,6 @@ package com.jbhunt.jbhuntrecruiter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -15,21 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
-import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
 
 public class Jobs extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -38,16 +34,21 @@ public class Jobs extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
     private ListView mDynamicListView;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
+    ArrayList<String> JobList;
+    ArrayList<String> hiddenArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v("MattWasHere","Bleh");
+        Log.v("MattWasHere", "Bleh");
         super.onCreate(savedInstanceState);
+        //addDrawerItems();
+        mDrawerList = (ListView)findViewById(R.id.dynamiclistview);
         setContentView(R.layout.activity_jobs);
         mDynamicListView = (ListView )findViewById(R.id.dynamiclistview);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -59,7 +60,6 @@ public class Jobs extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        getJobData();
     }
 
     public void getJobData()
@@ -77,7 +77,8 @@ public class Jobs extends ActionBarActivity
                 // called when response HTTP status is "200 OK"
                 Log.v("Nope", "Fdsafdsafsda");
                 try {
-                    ArrayList<String> JobList = new ArrayList<String>();
+                    JobList = new ArrayList<String>();
+                    hiddenArray = new ArrayList<String>();
 
                     JSONArray positions = response;
                     Log.v("position size", positions.length() + "" );
@@ -89,7 +90,10 @@ public class Jobs extends ActionBarActivity
                             String subPosition = position.split("\t")[0].trim();
                             String test = getIntent().getStringExtra("subPosition");
                             if(test.equals(subPosition))
+                            {
                                 JobList.add(c.getString("title")+ "\n" + c.getString("siteID"));
+                                hiddenArray.add(c.getString("id"));
+                            }
                             position = position.split("\t")[0].trim();
                             //FUCK IT WE'LL DO IT LIVE!!!!
 
@@ -98,6 +102,16 @@ public class Jobs extends ActionBarActivity
                     ArrayAdapter<String> positionAdapter = new ArrayAdapter<String>(Jobs.this, android.R.layout.simple_list_item_1, JobList);
                     ListView titles = (ListView)findViewById(R.id.dynamiclistview);
                     titles.setAdapter(positionAdapter);
+
+
+                    titles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        public void onItemClick(AdapterView<?> adapterView, View view, int index, long id){
+                            Intent it = new Intent(getApplicationContext(),Details.class);
+
+                            it.putExtra("id",(hiddenArray.get(index)));
+                            startActivity(it);
+                        }
+                    });
                 }
                 catch(Exception e){
                     Log.e("Error", e.toString());
@@ -109,6 +123,7 @@ public class Jobs extends ActionBarActivity
             public void onRetry(int retryNo) {
                 // called when request is retried
             }
+
         });
     }
 
@@ -172,6 +187,15 @@ public class Jobs extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void addDrawerItems() {
+        ArrayList<String> choices = new ArrayList<String>();
+        choices.add("Jobs");
+        choices.add("News");
+        choices.add("Settings");
+        mAdapter = new ArrayAdapter<String>(Jobs.this, android.R.layout.simple_list_item_1, choices);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -211,5 +235,6 @@ public class Jobs extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
 
 }

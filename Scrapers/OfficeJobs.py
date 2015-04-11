@@ -38,15 +38,16 @@ def Parse(url):
 				except: 
 					pass
 
+				# print Time
 				isFullTime = False
-				if Time is 'Full Time':
+				if Time == 'Full Time':
 					isFullTime = True
 
 				result += "'jobId'=> '" + Id + "',"
 				result += "'title'=> '" + Title + "',"
 				result += "'department'=> '" + Department + "',"
 				result += "'category'=> '" + Category + "',"
-				result += "'siteID'=> '00000',"
+				result += "'siteID'=> '" + City + ", " + State + "',"
 				result += "'postingDate'=> '" + jobDate + "',"
 				# result += "'Country'=> '" + Country + "',"
 				# result += "'State'=> '" + State + "',"
